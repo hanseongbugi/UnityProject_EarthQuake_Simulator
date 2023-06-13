@@ -6,7 +6,7 @@ public class cshPlayerController : MonoBehaviour
 {
     private Animator m_animator;
     private Vector3 m_velocity;
-    private bool m_isGrounded = true;
+    //private bool m_isGrounded = true;
     private bool m_jumpOn = false;
 
     public cshJoystick sJoystick;
@@ -21,7 +21,7 @@ public class cshPlayerController : MonoBehaviour
     void Update()
     {
         PlayerMove();
-        m_animator.SetBool("Jump", !m_isGrounded);
+        //m_animator.SetBool("Jump", !m_isGrounded);
     }
 
     public void OnVirtualPadJump()
@@ -63,7 +63,7 @@ public class cshPlayerController : MonoBehaviour
         m_velocity.y -= gravity * Time.deltaTime;
         controller.Move(m_velocity * m_moveSpeed * Time.deltaTime);
 
-        m_isGrounded = controller.isGrounded;
+        //m_isGrounded = controller.isGrounded;
     }
 
 }
