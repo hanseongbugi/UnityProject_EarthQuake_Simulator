@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class cshGenerateEarthQuake : MonoBehaviour
 {
-    public float movementRange = 3f; // 이동 가능한 범위
+    public float movementRange = 0.3f; // 이동 가능한 범위
     public Slider speedSlider; // Slider UI 요소를 가리키는 변수
     public float minSpeed = 1f; // 최소 속도
     public float maxSpeed = 10f; // 최대 속도
