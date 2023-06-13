@@ -1,40 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class cshGenerateEarthQuake : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public float speed = 5f; // 움직임 속도
-    public float movementRange = 10f; // 이동 가능한 범위
+    public float movementRange = 3f; // 이동 가능한 범위
+    public Slider speedSlider; // Slider UI 요소를 가리키는 변수
+    public float minSpeed = 1f; // 최소 속도
+    public float maxSpeed = 10f; // 최대 속도
 
+    private float currentSpeed; // 현재 속도
     private Vector3 targetPosition; // 목표 위치
 
-    void Start()
+    private void Start()
     {
+        currentSpeed = 0;
         SetRandomTargetPosition();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        currentSpeed = speedSlider.value;
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
 
-        // 목표 위치에 도착하면 새로운 목표 위치 설정
         if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
         {
             SetRandomTargetPosition();
         }
-
     }
+
+    public void OnSpeedChanged()
+    {
+        currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, speedSlider.value / speedSlider.maxValue);
+    }
+
     private void SetRandomTargetPosition()
     {
-        // 랜덤한 x와 z 좌표 생성
         float randomX = Random.Range(-movementRange, movementRange);
         float randomY = Random.Range(-movementRange, movementRange);
         float randomZ = Random.Range(-movementRange, movementRange);
 
-        // 새로운 목표 위치 설정
         targetPosition = new Vector3(randomX, randomY, randomZ);
     }
 }
