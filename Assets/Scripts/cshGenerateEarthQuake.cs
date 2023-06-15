@@ -9,7 +9,6 @@ public class cshGenerateEarthQuake : MonoBehaviour
     public Slider speedSlider; // Slider UI 요소를 가리키는 변수
     public float minSpeed = 1f; // 최소 속도
     public float maxSpeed = 10f; // 최대 속도
-
     private float currentSpeed; // 현재 속도
     private Vector3 targetPosition; // 목표 위치
 
@@ -17,6 +16,7 @@ public class cshGenerateEarthQuake : MonoBehaviour
     {
         currentSpeed = 0;
         SetRandomTargetPosition();
+
     }
 
     private void Update()
@@ -28,6 +28,7 @@ public class cshGenerateEarthQuake : MonoBehaviour
         {
             SetRandomTargetPosition();
         }
+
     }
 
     public void OnSpeedChanged()
@@ -43,4 +44,5 @@ public class cshGenerateEarthQuake : MonoBehaviour
 
         targetPosition = new Vector3(randomX, randomY, randomZ);
     }
+
 }
