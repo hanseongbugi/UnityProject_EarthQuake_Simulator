@@ -14,4 +14,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SchoolScene.unity
     guid: fbb18f45e1cfc3c40895cf03fb624074
+
+  - enabled: 1
+    path: Assets/Scenes/EndScene.unity
+    guid: abbfa1ddb0922a645baf6ac645c5bdc7
+  - enabled: 1
+    path: Assets/Scenes/CertifiedScene.unity
+    guid: df7ee2db1fc809543888b95f6b380d85
   m_configObjects: {}
