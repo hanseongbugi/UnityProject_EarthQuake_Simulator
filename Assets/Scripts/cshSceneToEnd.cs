@@ -19,7 +19,7 @@ public class cshSceneToEnd : MonoBehaviour
         if (timerStarted)
         {
             timer += Time.deltaTime;
-            Debug.Log(timer);
+            //Debug.Log(timer);
             if (timer >= delay)
             {
                 SceneManager.LoadScene(sceneName);
