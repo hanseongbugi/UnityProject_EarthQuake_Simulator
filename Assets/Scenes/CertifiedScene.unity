@@ -510,7 +510,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 'Simulation Start '
+  m_Text: "\tCirtified"
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -680,7 +680,6 @@ GameObject:
   - component: {fileID: 758700244}
   - component: {fileID: 758700243}
   - component: {fileID: 758700242}
-  - component: {fileID: 758700246}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -767,22 +766,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &758700246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 758700241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db51b80d3e0e7d42b7ddc2e1897f955, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementRange: 0.5
-  speedSlider: {fileID: 0}
-  minSpeed: 1
-  maxSpeed: 10
 --- !u!1 &825796967
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,9 +778,9 @@ GameObject:
   - component: {fileID: 825796973}
   - component: {fileID: 825796972}
   - component: {fileID: 825796971}
-  - component: {fileID: 825796969}
+  - component: {fileID: 825796974}
   m_Layer: 5
-  m_Name: School
+  m_Name: End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -824,20 +807,6 @@ RectTransform:
   m_AnchoredPosition: {x: 180, y: 0}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &825796969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 825796967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba2d1374dbb7b424f88785e01abb3d04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 825796971}
-  sceneName: SchoolScene
 --- !u!114 &825796971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,6 +889,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825796967}
   m_CullTransparentMesh: 1
+--- !u!114 &825796974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825796967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d33b9c79e6a674b9664e4285c32f7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 825796971}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,7 +1112,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Simulation Start \u200B"
+  m_text: "\tCirtified\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
@@ -1221,7 +1203,7 @@ GameObject:
   - component: {fileID: 1328224491}
   - component: {fileID: 1328224490}
   m_Layer: 5
-  m_Name: Home
+  m_Name: Restart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1261,7 +1243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1328224491}
-  sceneName: HomeScene
+  sceneName: ChoiceScene
 --- !u!114 &1328224491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1499,7 +1481,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: School
+  m_text: 'End
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1634,9 +1618,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Home
-
-'
+  m_text: Restart
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
