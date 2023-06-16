@@ -1122,7 +1122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 705507995}
   - component: {fileID: 705507994}
-  - component: {fileID: 705507996}
   - component: {fileID: 705507997}
   m_Layer: 0
   m_Name: Directional Light
@@ -1208,21 +1207,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &705507996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705507993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3adbf801361bcd0449e851a3a2ad1370, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 30
-  sceneName: EndScene
-  timer: 0
 --- !u!114 &705507997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1237,7 +1221,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 20
   sceneName: EndScene
-  timer: 0
 --- !u!1001 &706269895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1608,11 +1591,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e266e506767bab4eaa329bd9e89e644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 190745568}
-  offsetX: 0
-  offsetY: 3
-  offsetZ: -6
-  CameraSpeed: 5
 --- !u!1 &966489210 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1821537648748956, guid: 7d65db92ee1ad5644a8177816885460b, type: 3}
@@ -2117,8 +2095,9 @@ GameObject:
   - component: {fileID: 1513906724}
   - component: {fileID: 1513906726}
   - component: {fileID: 1513906725}
+  - component: {fileID: 1513906727}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2131,7 +2110,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1513906723}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2141,7 +2120,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -508, y: 302}
+  m_AnchoredPosition: {x: -508.00003, y: 301.99994}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1513906725
@@ -2241,6 +2220,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1513906723}
   m_CullTransparentMesh: 1
+--- !u!114 &1513906727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513906723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a14f79a578507c4fbd76f5343691d60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 1513906725}
 --- !u!54 &1560306187
 Rigidbody:
   m_ObjectHideFlags: 0
