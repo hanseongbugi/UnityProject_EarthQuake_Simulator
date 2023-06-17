@@ -26,6 +26,7 @@ public class cshPhtonGenerateEarthQuake : MonoBehaviourPun
     {
         if (speedSlider!=null)
         {
+            //Debug.Log("update");
             PhotonView pv = GetComponent<PhotonView>();
             pv.RPC("SyncSliderValue", RpcTarget.All, speedSlider.value);
 
