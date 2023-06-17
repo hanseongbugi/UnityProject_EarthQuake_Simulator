@@ -13,7 +13,7 @@ public class cshPhtonGenerateEarthQuake : MonoBehaviourPun
     public float maxSpeed = 10f; // 최대 속도
     private float currentSpeed; // 현재 속도
     private Vector3 targetPosition; // 목표 위치
-    
+    public Text program;
 
     private void Start()
     {
@@ -57,5 +57,54 @@ public class cshPhtonGenerateEarthQuake : MonoBehaviourPun
     {
         currentSpeed = value;
         speedSlider.value = value;
+        if (value >= 11)
+        {
+            program.text = "Magnitude 11 : Everything was destroyed.";
+        }else if(value >= 10)
+        {
+            program.text = "Magnitude 10 : Everything was destroyed.";
+        }
+        else if (value >= 9)
+        {
+            program.text = "Magnitude 9 : Everything was destroyed.";
+        }
+        else if (value >= 8)
+        {
+            program.text = "Magnitude 8 : Most buildings can be destroyed.";
+        }
+        else if (value >= 7)
+        {
+            program.text = "Magnitude 7 : You can go into a panic. Stay calm and go where you can avoid your head.";
+        }
+        else if (value >= 6)
+        {
+            program.text = "Magnitude 6 : It's hard to stand and it can damage strong buildings. Go where you can avoid your head while shaking.";
+        }
+        else if (value >= 5)
+        {
+            program.text = "Magnitude 5 : Buildings can also be cracked. Go where you can avoid your head while shaking.";
+        }
+        else if (value >= 4)
+        {
+            program.text = "Magnitude 4 : Doors, long doors, and things can shake. Go where you can avoid your head while shaking.";
+        }
+        else if (value >= 3)
+        {
+            program.text = "Magnitude 3 : It's the scale that sensitive people can feel. There is little damage, so please wait inside.";
+        }
+        else if (value >= 2)
+        {
+            program.text = "Magnitude 2 : There was a slight earthquake. It's safe, so please wait inside.";
+
+        }
+        else if (value >= 1)
+        {
+            program.text = "Magnitude 1 : It's safe, so please wait inside.";
+        }
+        else
+        {
+            program.text = "Magnitude 0 : It's a normal situation.";
+        }
+
     }
 }
