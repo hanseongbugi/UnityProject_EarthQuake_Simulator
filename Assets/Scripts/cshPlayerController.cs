@@ -28,7 +28,7 @@ public class cshPlayerController : MonoBehaviour
         PlayerMove();
         flag = true;
         //Debug.Log(HP);
-        //if (HP == 0) SceneManager.LoadScene("EndScene");
+        if (HP == 0) SceneManager.LoadScene("EndScene");
         HpBarObject.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 1.8f, 0));
         //HpBar.value = 0.3f;
         UpdateHpBar();
