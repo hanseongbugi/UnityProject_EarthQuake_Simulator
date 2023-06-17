@@ -11,6 +11,7 @@ public class cshGenerateEarthQuake : MonoBehaviour
     public float maxSpeed = 10f; // 최대 속도
     private float currentSpeed; // 현재 속도
     private Vector3 targetPosition; // 목표 위치
+    public GameObject destroyEffectPrefab;
 
     private void Start()
     {
@@ -30,8 +31,17 @@ public class cshGenerateEarthQuake : MonoBehaviour
         }
 
     }
+	private void OnTriggerEnter(Collider collision)
+	{
+		if (collision.CompareTag("Bullet"))
+		{
+            //Instantiate()
+            Instantiate(destroyEffectPrefab, collision.transform.position, Quaternion.identity);
+            Destroy(collision.gameObject);
+		}
+	}
 
-    public void OnSpeedChanged()
+	public void OnSpeedChanged()
     {
         currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, speedSlider.value / speedSlider.maxValue);
     }

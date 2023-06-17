@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class cshSpawnBullets : MonoBehaviour
 {
@@ -13,22 +14,26 @@ public class cshSpawnBullets : MonoBehaviour
     public float interval = 0.5f;
 
     private float timer = 0f;
+    public Slider speedSlider;
 
     void Update()
     {
         timer += Time.deltaTime;
-
-        if (timer >= interval)
-        {
-            SpawnBullet();
-            timer = 0f;
+		if (speedSlider.value > 6)
+		{
+            if (timer >= interval)
+            {
+                SpawnBullet();
+                timer = 0f;
+            }
         }
+      
     }
 
     void SpawnBullet()
     {
         Vector3 spawnPosition = new Vector3(Random.Range(minX, maxX), 10f, Random.Range(minZ, maxZ));
-        GameObject bullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
+         Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
     }
 
 }

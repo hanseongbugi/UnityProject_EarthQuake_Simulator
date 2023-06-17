@@ -3,7 +3,8 @@ guid: 4d4de085df183dc4a8738c4eee113ee7
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - destroyEffectPrefab: {fileID: 1466171438173320683, guid: a471942affb4f2646869de10dab4d5dc, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

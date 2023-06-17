@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class cshPlayerController : MonoBehaviour
@@ -8,20 +9,39 @@ public class cshPlayerController : MonoBehaviour
     public float m_moveSpeed = 2.0f;
     private Animator m_animator;
     private cshAttackArea m_attackArea = null;
-    private int HP = 3;
-
+    private int HP;
+    private bool flag = true;
     void Start()
     {
         m_animator = GetComponent<Animator>();
         m_attackArea = GetComponentInChildren<cshAttackArea>();
+        HP = 3;
     }
 
     void Update()
     {
         PlayerMove();
+        flag = true;
+        //Debug.Log(HP);
+        if (HP == 0) SceneManager.LoadScene("EndScene");
+
     }
-    
-    void PlayerMove()
+
+	private void OnTriggerEnter(Collider collision)
+	{
+		if (collision.CompareTag("Bullet"))
+		{
+			if (flag && HP>0)
+			{
+                HP--;
+                Debug.Log("HIT");
+                flag = false;
+            }
+            
+
+        }
+	}
+	void PlayerMove()
     {
         
         CharacterController controller = GetComponent<CharacterController>();
