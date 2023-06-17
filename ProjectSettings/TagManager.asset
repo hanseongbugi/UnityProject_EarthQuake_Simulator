@@ -6,6 +6,8 @@ TagManager:
   tags:
   - BreakableObject
   - HideObject
+  - Bullet
+  - Shield
   layers:
   - Default
   - TransparentFX

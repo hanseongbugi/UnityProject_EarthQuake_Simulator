@@ -92,7 +92,7 @@ public class cshPhtonPlayerController : MonoBehaviourPun
             var obj = collider.GetComponent<cshBreakableObject>();
             if (obj != null)
             {
-                obj.PlayEffect();
+                obj.flag=1;
                 cntBreak++;
             }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
@@ -9,13 +10,17 @@ public class cshPlayerController : MonoBehaviour
     public float m_moveSpeed = 2.0f;
     private Animator m_animator;
     private cshAttackArea m_attackArea = null;
-    private int HP;
+    public float HP;
     private bool flag = true;
+    public GameObject HpBarObject;
+    public Slider HpBar;
+    //public GameObject HpBar;
     void Start()
     {
         m_animator = GetComponent<Animator>();
         m_attackArea = GetComponentInChildren<cshAttackArea>();
-        HP = 3;
+        HP = 10;
+        HpBarObject = GameObject.Find("Canvas/HP");
     }
 
     void Update()
@@ -23,11 +28,18 @@ public class cshPlayerController : MonoBehaviour
         PlayerMove();
         flag = true;
         //Debug.Log(HP);
-        if (HP == 0) SceneManager.LoadScene("EndScene");
-
+        //if (HP == 0) SceneManager.LoadScene("EndScene");
+        HpBarObject.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 1.8f, 0));
+        //HpBar.value = 0.3f;
+        UpdateHpBar();
     }
 
-	private void OnTriggerEnter(Collider collision)
+    void UpdateHpBar() //ÃÊ±â hp 10 -> VALUE =0~1
+    {
+        HpBar.value = (HP * 1/10);
+    }
+
+    private void OnTriggerEnter(Collider collision)
 	{
 		if (collision.CompareTag("Bullet"))
 		{
