@@ -45,7 +45,7 @@ public class cshGameManager : MonoBehaviourPun // 점수와 게임 오버 여부 및 게임 
         // 네트워크상의 모든 클라이언트에서 생성 실행  
         // 해당 게임 오브젝트의 주도권은 생성 메서드를 직접 실행한 클라이언트에 있음
         GameObject player = PhotonNetwork.Instantiate(PlayerPrefab.name, randomSpawnPos, Quaternion.identity);
-        generateEarthQuake.speedSlider = player.GetComponent<Slider>();
+        generateEarthQuake.speedSlider = player.GetComponentInChildren<Slider>();
     }
 
 }
