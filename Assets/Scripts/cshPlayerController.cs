@@ -8,6 +8,7 @@ public class cshPlayerController : MonoBehaviour
     public float m_moveSpeed = 2.0f;
     private Animator m_animator;
     private cshAttackArea m_attackArea = null;
+    private int HP = 3;
 
     void Start()
     {
@@ -19,9 +20,10 @@ public class cshPlayerController : MonoBehaviour
     {
         PlayerMove();
     }
-
+    
     void PlayerMove()
     {
+        
         CharacterController controller = GetComponent<CharacterController>();
         float gravity = 20.0f;
         float h = Input.GetAxis("Horizontal");
@@ -30,7 +32,7 @@ public class cshPlayerController : MonoBehaviour
         Vector3 moveHorizontal = Vector3.right * h;
         Vector3 moveVertical = Vector3.forward * v;
         Vector3 velocity = (moveHorizontal + moveVertical).normalized;
-
+        
         m_animator.SetFloat("Move", velocity.magnitude);
 
         if (velocity.magnitude > 0.5)
@@ -54,8 +56,8 @@ public class cshPlayerController : MonoBehaviour
     {
 
         if (this == null) { return; }
-
-        m_animator.SetTrigger("Down");
+       // transform.rotation *= Quaternion.Euler(1f,180f,1f);
+       // m_animator.SetBool("Down", true);
 
         //int cnt = m_attackArea.colliders.Count;
 
@@ -65,10 +67,18 @@ public class cshPlayerController : MonoBehaviour
             //center += collider.transform.localPosition;
             
         }
-        transform.rotation *= Quaternion.Euler(0f,180f,0f);
-       
-    }
+        //StartCoroutine(HideCharacterForSeconds(3f));
+        gameObject.SetActive(false);
+        //m_animator.SetBool("Jump", false);
+        Invoke("ShowCharacter", 3f);
     
+     }
+    private void ShowCharacter()
+    {
+        // 캐릭터를 다시 표시
+        gameObject.SetActive(true);
+        m_animator.SetBool("Down", false); // 숨기기 애니메이션 상태를 해제
+    }
     public void OnVirtualPadAttack()
     {
         if (this == null) { return; }
@@ -90,6 +100,7 @@ public class cshPlayerController : MonoBehaviour
             }
             
         }
+
         //if (cntBreak > 0) m_attackArea.colliders.Clear();
     }
 
