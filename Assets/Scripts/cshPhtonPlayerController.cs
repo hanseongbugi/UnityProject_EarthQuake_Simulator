@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class cshPhtonPlayerController : MonoBehaviourPun
 {
@@ -9,11 +11,18 @@ public class cshPhtonPlayerController : MonoBehaviourPun
     private Animator m_animator;
     private cshAttackArea m_attackArea = null;
     public GameObject m_UI;
-
+    public float HP;
+    private bool flag = true;
+    public GameObject HpBarObject;
+    public Slider HpBar;
+    private GameObject baseObj;
+    private GameObject bipObj;
     void Start()
     {
         m_animator = GetComponent<Animator>();
         m_attackArea = GetComponentInChildren<cshAttackArea>();
+        HP = 3;
+        HpBarObject = GameObject.Find("Canvas/HP");
     }
 
     void Update()
@@ -25,8 +34,17 @@ public class cshPhtonPlayerController : MonoBehaviourPun
         }
 
         PlayerMove();
+        flag = true;
+        //Debug.Log(HP);
+        if (HP == 0) SceneManager.LoadScene("EndScene");
+        HpBarObject.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 1.8f, 0));
+        //HpBar.value = 0.3f;
+        UpdateHpBar();
     }
-
+    void UpdateHpBar() //초기 hp 10 -> VALUE =0~1
+    {
+        HpBar.value = (HP * 1 / 3);
+    }
     void PlayerMove()
     {
         CharacterController controller = GetComponent<CharacterController>();
@@ -62,7 +80,7 @@ public class cshPhtonPlayerController : MonoBehaviourPun
 
         if (this == null) { return; }
 
-        m_animator.SetTrigger("Down");
+        //m_animator.SetTrigger("Down");
 
         //int cnt = m_attackArea.colliders.Count;
 
@@ -72,10 +90,25 @@ public class cshPhtonPlayerController : MonoBehaviourPun
             //center += collider.transform.localPosition;
 
         }
-        transform.rotation *= Quaternion.Euler(0f, 180f, 0f);
+       // transform.rotation *= Quaternion.Euler(0f, 180f, 0f);
+
+        //StartCoroutine(HideCharacterForSeconds(3f));
+        //gameObject.SetActive(false);
+        baseObj = GameObject.Find("base");
+        bipObj = GameObject.Find("Bip001");
+        baseObj.SetActive(false);
+        bipObj.SetActive(false);
+        //m_animator.SetBool("Jump", false);
+        Invoke("ShowCharacter", 3f);
 
     }
-
+    private void ShowCharacter()
+    {
+        // 캐릭터를 다시 표시
+        baseObj.SetActive(true);
+        bipObj.SetActive(true);
+        m_animator.SetBool("Down", false); // 숨기기 애니메이션 상태를 해제
+    }
     public void OnVirtualPadAttack()
     {
         if (this == null) { return; }
@@ -98,5 +131,19 @@ public class cshPhtonPlayerController : MonoBehaviourPun
 
         }
         //if (cntBreak > 0) m_attackArea.colliders.Clear();
+    }
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.CompareTag("Bullet"))
+        {
+            if (flag && HP > 0)
+            {
+                HP--;
+                Debug.Log("HIT");
+                flag = false;
+            }
+
+
+        }
     }
 }

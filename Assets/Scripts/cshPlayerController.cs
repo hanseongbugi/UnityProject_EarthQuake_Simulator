@@ -19,7 +19,7 @@ public class cshPlayerController : MonoBehaviour
     {
         m_animator = GetComponent<Animator>();
         m_attackArea = GetComponentInChildren<cshAttackArea>();
-        HP = 10;
+        HP = 3;
         HpBarObject = GameObject.Find("Canvas/HP");
     }
 
@@ -36,7 +36,7 @@ public class cshPlayerController : MonoBehaviour
 
     void UpdateHpBar() //ÃÊ±â hp 10 -> VALUE =0~1
     {
-        HpBar.value = (HP * 1/10);
+        HpBar.value = (HP * 1/3);
     }
 
     private void OnTriggerEnter(Collider collision)

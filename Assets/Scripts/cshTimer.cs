@@ -18,6 +18,6 @@ public class cshTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timerText.text = Mathf.Floor(20-cshSceneToEnd.timer).ToString();
+        timerText.text = Mathf.Floor(100-cshSceneToEnd.timer).ToString();
     }
 }

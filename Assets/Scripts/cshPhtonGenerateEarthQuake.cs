@@ -13,35 +13,53 @@ public class cshPhtonGenerateEarthQuake : MonoBehaviourPun
     public float maxSpeed = 10f; // 최대 속도
     private float currentSpeed; // 현재 속도
     private Vector3 targetPosition; // 목표 위치
+    public GameObject destroyEffectPrefab;
     public Text program;
-
+    private bool initSlider = false;
     private void Start()
     {
         currentSpeed = 0;
         SetRandomTargetPosition();
-
+        UpdateProgramText(currentSpeed);
     }
 
     private void Update()
     {
-        if (speedSlider!=null)
+		if (!initSlider&&speedSlider)
+		{
+            // Slider 값 변경 시 호출될 콜백 함수 설정
+            speedSlider.onValueChanged.AddListener(OnSpeedChanged);
+            initSlider = true;
+        }
+        Debug.Log(currentSpeed);
+        if (photonView.IsMine)
         {
-            //Debug.Log("update");
             PhotonView pv = GetComponent<PhotonView>();
-            pv.RPC("SyncSliderValue", RpcTarget.All, speedSlider.value);
+            pv.RPC("SyncSliderValue", RpcTarget.All, currentSpeed);
+        }
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
 
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
-
-            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
-            {
-                SetRandomTargetPosition();
-            }
+        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+        {
+            SetRandomTargetPosition();
         }
     }
-
-    public void OnSpeedChanged()
+    public void OnSpeedChanged(float value)
     {
-        currentSpeed = Mathf.Lerp(minSpeed, maxSpeed, speedSlider.value / speedSlider.maxValue);
+        Debug.Log("speed Changed");
+        currentSpeed = value;
+            
+        
+        // 프로그램 텍스트 업데이트
+        //UpdateProgramText(value);
+    }
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.CompareTag("Bullet"))
+        {
+            Instantiate(destroyEffectPrefab, collision.transform.position, Quaternion.identity);
+            Destroy(collision.gameObject);
+        }
     }
 
     private void SetRandomTargetPosition()
@@ -52,15 +70,23 @@ public class cshPhtonGenerateEarthQuake : MonoBehaviourPun
 
         targetPosition = new Vector3(randomX, randomY, randomZ);
     }
+
     [PunRPC]
     private void SyncSliderValue(float value)
     {
-        currentSpeed = value;
-        speedSlider.value = value;
+
+          speedSlider.value = value;
+        // 프로그램 텍스트 업데이트
+        UpdateProgramText(value);
+    }
+
+    private void UpdateProgramText(float value)
+    {
         if (value >= 11)
         {
             program.text = "Magnitude 11 : Everything was destroyed.";
-        }else if(value >= 10)
+        }
+        else if (value >= 10)
         {
             program.text = "Magnitude 10 : Everything was destroyed.";
         }
@@ -95,7 +121,6 @@ public class cshPhtonGenerateEarthQuake : MonoBehaviourPun
         else if (value >= 2)
         {
             program.text = "Magnitude 2 : There was a slight earthquake. It's safe, so please wait inside.";
-
         }
         else if (value >= 1)
         {
@@ -105,6 +130,29 @@ public class cshPhtonGenerateEarthQuake : MonoBehaviourPun
         {
             program.text = "Magnitude 0 : It's a normal situation.";
         }
+    }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // 데이터를 전송
+            stream.SendNext(speedSlider.value);
+        }
+        else
+        {
+            // 데이터를 받음
+            float receivedValue = (float)stream.ReceiveNext();
+
+            // 로컬 플레이어가 아닌 경우에만 값을 동기화
+            if (!photonView.IsMine)
+            {
+                currentSpeed = receivedValue;
+                speedSlider.value = receivedValue;
+
+                // 프로그램 텍스트 업데이트
+                UpdateProgramText(receivedValue);
+            }
+        }
     }
 }

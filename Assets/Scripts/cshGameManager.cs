@@ -28,6 +28,9 @@ public class cshGameManager : MonoBehaviourPun // 점수와 게임 오버 여부 및 게임 
     public GameObject PlayerPrefab; // 생성할 VR 플레이어 캐릭터
     public GameObject SpawnPosPrefab; // 생성할 VR 플레이어 캐릭터의 위치
     public cshPhtonGenerateEarthQuake generateEarthQuake;
+    public cshBreakableObject breakableObject;
+    public cshSpawnBullets spwnBullets;
+    public cshSceneToEnd sceneToEnd;
     private void Awake()
     {
         // 씬에 싱글톤 오브젝트가 된 다른 GameManager 오브젝트가 있다면
@@ -47,6 +50,9 @@ public class cshGameManager : MonoBehaviourPun // 점수와 게임 오버 여부 및 게임 
         GameObject player = PhotonNetwork.Instantiate(PlayerPrefab.name, randomSpawnPos, Quaternion.identity);
         generateEarthQuake.speedSlider = player.GetComponentInChildren<Slider>();
         generateEarthQuake.program = player.GetComponentInChildren<Text>();
+        breakableObject.player = player;
+        spwnBullets.speedSlider = player.GetComponentInChildren<Slider>();
+        sceneToEnd.speedSlider = player.GetComponentInChildren<Slider>();
     }
 
 }
